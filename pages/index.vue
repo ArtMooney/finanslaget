@@ -17,7 +17,7 @@ definePageMeta({
 </script>
 
 <template>
-  <div class="w-full p-32 bg-[pink]/25">
+  <div class="max-w-[50rem] w-[50rem] mx-auto mt-12">
     <CreditCheckInputs
       v-if="!submitted"
       @submit="handleSubmit"
