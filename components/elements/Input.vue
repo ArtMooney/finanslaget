@@ -6,7 +6,7 @@
 
     <input
       v-if="type !== 'message'"
-      class="my-1 w-full border border-[#cccccc] p-4 placeholder:text-[#cccccc] rounded-lg text-base text-[#666666] focus:border-black focus:outline-none transition-colors duration-200"
+      class="my-1 w-full border border-[#cccccc] p-3 placeholder:text-[#cccccc] rounded-lg text-base text-[#666666] focus:border-black focus:outline-none transition-colors duration-200"
       maxlength="256"
       :name="name"
       :type="type"
@@ -18,7 +18,7 @@
 
     <textarea
       v-if="type === 'message'"
-      class="m-0 min-h-28 w-full border border-[#cccccc] p-4 placeholder:text-[#cccccc] rounded-lg text-base text-[#666666]"
+      class="m-0 min-h-28 w-full border border-[#cccccc] p-3 placeholder:text-[#cccccc] rounded-lg text-base text-[#666666]"
       maxlength="5000"
       :name="name"
       :placeholder="placeholderText"
