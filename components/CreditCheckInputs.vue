@@ -38,6 +38,7 @@
   </div>
 
   <Button
+    @click="$emit('submit')"
     text="Skapa snabbkalkyl"
     link=""
     hash=""
@@ -53,6 +54,9 @@ import Button from "~/components/elements/Button.vue";
 
 export default {
   name: "CreditCheck",
+
   components: { Button, Input },
+
+  emits: ["submit"],
 };
 </script>
