@@ -1,5 +1,7 @@
 <template>
-  <div class="bg-[#fafafa] font-body h-full flex flex-col justify-center">
+  <div
+    class="bg-[#fafafa] font-body h-full flex flex-col justify-center rounded-lg p-8"
+  >
     <div class="text-[#009bd9] font-heading text-2xl font-bold">
       {{ title }}
     </div>

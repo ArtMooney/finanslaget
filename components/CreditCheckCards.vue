@@ -6,7 +6,7 @@
     >
   </div>
 
-  <div class="grid grid-cols-3 gap-x-3 gap-y-1 h-32 text-center items-center">
+  <div class="grid md:grid-cols-3 gap-3 min-h-32 text-center items-center">
     <CreditCheckCard
       title="36 månader"
       price="1345 SEK"

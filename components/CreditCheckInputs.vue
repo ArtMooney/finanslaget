@@ -1,5 +1,5 @@
 <template>
-  <div class="grid grid-cols-2 gap-x-3 gap-y-1">
+  <div class="grid md:grid-cols-2 gap-x-3 gap-y-1">
     <Input
       name="email"
       label-text="Email"
