@@ -1,10 +1,12 @@
 <template>
   <div class="text-sm text-black">
-    <label v-if="labelText" :for="name">{{ labelText }}</label>
+    <label v-if="labelText" :for="name"
+      >{{ labelText }}<span class="text-red-600">*</span></label
+    >
 
     <input
       v-if="type !== 'message'"
-      class="my-2 w-full border border-solid border-black/25 px-4 py-3 placeholder:text-neutral-300"
+      class="my-1 w-full border border-[#cccccc] p-4 placeholder:text-[#cccccc] rounded-lg text-base text-[#666666] focus:border-black focus:outline-none transition-colors duration-200"
       maxlength="256"
       :name="name"
       :type="type"
@@ -16,7 +18,7 @@
 
     <textarea
       v-if="type === 'message'"
-      class="m-0 min-h-28 w-full border border-solid border-black/25 px-4 py-2 placeholder:text-neutral-300"
+      class="m-0 min-h-28 w-full border border-[#cccccc] p-4 placeholder:text-[#cccccc] rounded-lg text-base text-[#666666]"
       maxlength="5000"
       :name="name"
       :placeholder="placeholderText"
