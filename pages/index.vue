@@ -37,6 +37,16 @@ export default {
     };
   },
 
+  async mounted() {
+    try {
+      this.apiData = await $fetch("/api/calculate");
+      console.log("Data:", this.apiData);
+    } catch (err) {
+      this.error = err;
+      console.error("Error:", err);
+    }
+  },
+
   methods: {
     handleSubmit() {
       console.log("submitted");
