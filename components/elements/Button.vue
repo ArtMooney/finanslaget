@@ -1,15 +1,7 @@
 <template>
   <button
     @click="navigateTo({ path: link, hash: hash })"
-    class="min-w-40 rounded px-6 py-3 text-center text-sm text-black no-underline duration-200"
-    :class="[
-      styling === 'dark' ? 'bg-neutral-800 text-white' : 'bg-white/95',
-      outline
-        ? styling === 'dark'
-          ? 'border-2 border-white'
-          : 'border-2 border-neutral-900'
-        : '',
-    ]"
+    class="rounded-lg px-6 py-3 text-center text-base text-white no-underline duration-200 bg-[#009bd9] cursor-pointer"
     :type="type"
     :data-wait="dataWait"
     text=""
@@ -43,11 +35,6 @@ export default {
       type: String,
       required: false,
       default: "",
-    },
-    styling: {
-      type: String,
-      required: false,
-      default: "dark",
     },
     outline: {
       type: Boolean,

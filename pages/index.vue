@@ -59,7 +59,14 @@ definePageMeta({
       />
     </div>
 
-    <Button text="Knapp" link="" hash="" type="submit" data-wait="Vänta..." />
+    <Button
+      text="Skapa snabbkalkyl"
+      link=""
+      hash=""
+      type="submit"
+      data-wait="Vänta..."
+      class="mt-2"
+    />
   </div>
 </template>
 
