@@ -1,12 +1,13 @@
 <template>
   <div
+    v-if="months && price"
     class="bg-[#fafafa] font-body h-full flex flex-col justify-center rounded-lg p-8"
   >
     <div class="text-[#009bd9] font-heading text-2xl font-bold">
-      {{ title }}
+      {{ months }} månader
     </div>
-    <p>{{ price }}</p>
-    <p>{{ priceSubtext }}</p>
+    <p>{{ price }} SEK</p>
+    <p>per månad</p>
   </div>
 </template>
 
@@ -15,20 +16,15 @@ export default {
   name: "CreditCheckCard",
 
   props: {
-    title: {
-      type: String,
+    months: {
+      type: Number,
       required: false,
-      default: "",
+      default: null,
     },
     price: {
-      type: String,
+      type: Number,
       required: false,
-      default: "",
-    },
-    priceSubtext: {
-      type: String,
-      required: false,
-      default: "",
+      default: null,
     },
   },
 };
