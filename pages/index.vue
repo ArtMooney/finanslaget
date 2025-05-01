@@ -23,7 +23,7 @@ definePageMeta({
       @submit="handleSubmit"
     ></CreditCheckInputs>
 
-    <CreditCheckCards v-if="submitted"></CreditCheckCards>
+    <CreditCheckCards v-if="submitted" :api-data="apiData"></CreditCheckCards>
   </div>
 </template>
 
@@ -32,25 +32,31 @@ export default {
   name: "Index",
 
   data() {
+    const config = useRuntimeConfig();
     return {
       submitted: false,
+      apiData: {},
+      error: false,
+      userName: config.public.userName,
+      userPass: config.public.userPass,
     };
   },
 
-  async mounted() {
-    try {
-      this.apiData = await $fetch("/api/calculate");
-      console.log("Data:", this.apiData);
-    } catch (err) {
-      this.error = err;
-      console.error("Error:", err);
-    }
-  },
-
   methods: {
-    handleSubmit() {
-      console.log("submitted");
-      this.submitted = true;
+    async handleSubmit() {
+      try {
+        this.apiData = await $fetch("/api/calculate", {
+          method: "POST",
+          headers: {
+            Authorization: "Basic " + btoa(this.userName + ":" + this.userPass),
+          },
+          body: {},
+        });
+
+        console.log(this.apiData);
+
+        this.submitted = true;
+      } catch (err) {}
     },
   },
 };

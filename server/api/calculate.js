@@ -6,12 +6,12 @@ export default defineEventHandler(async (event) => {
   const config = useRuntimeConfig();
   const headers = getHeaders(event);
 
-  // if (!(await checkLogin(headers, config.userName, config.userPass))) {
-  //   throw createError({
-  //     statusCode: 401,
-  //     statusMessage: "Login failed",
-  //   });
-  // }
+  if (!(await checkLogin(headers, config.userName, config.userPass))) {
+    throw createError({
+      statusCode: 401,
+      statusMessage: "Login failed",
+    });
+  }
 
   const totalAmount = 10000;
 
@@ -30,5 +30,5 @@ export default defineEventHandler(async (event) => {
     }
   }
 
-  return { result };
+  return result;
 });
