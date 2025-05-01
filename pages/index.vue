@@ -24,6 +24,10 @@ definePageMeta({
     ></CreditCheckInputs>
 
     <CreditCheckCards v-if="submitted" :api-data="apiData"></CreditCheckCards>
+
+    <div v-if="error" class="text-sm mt-4 bg-red-200 p-2">
+      Något gick tyvärr fel när beräkningen skulle göras.
+    </div>
   </div>
 </template>
 
@@ -43,20 +47,20 @@ export default {
   },
 
   methods: {
-    async handleSubmit() {
+    async handleSubmit(event) {
       try {
         this.apiData = await $fetch("/api/calculate", {
           method: "POST",
           headers: {
             Authorization: "Basic " + btoa(this.userName + ":" + this.userPass),
           },
-          body: {},
+          body: event,
         });
 
-        console.log(this.apiData);
-
         this.submitted = true;
-      } catch (err) {}
+      } catch (err) {
+        this.error = true;
+      }
     },
   },
 };
