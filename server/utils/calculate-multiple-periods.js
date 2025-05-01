@@ -15,7 +15,7 @@ export async function calculateMultiplePeriods(
 
   let bodyContent = JSON.stringify({
     totalAmount: totalAmount,
-    noOfMonths: 60, // Detta värde ersätts av systemet med olika perioder
+    noOfMonths: 60, // Detta värde ställs i denna funktion hos api-leverantören
     residualAmount: residualAmount,
     downPayment: downPayment,
     monthlyPayment: 0, // Sätts till 0 då vi vill beräkna detta värde

@@ -1,5 +1,6 @@
 import { checkLogin } from "../utils/check-login.js";
 import { calculateMonthlyPayment } from "../utils/calculate-monthly-payment.js";
+import { calculateMultiplePeriods } from "../utils/calculate-multiple-periods.js";
 
 export default defineEventHandler(async (event) => {
   const config = useRuntimeConfig();
@@ -12,15 +13,22 @@ export default defineEventHandler(async (event) => {
   //   });
   // }
 
-  // Exempel på användning:
-  // const result = await calculateMonthlyPayment(10000, 60, 1000, 1000);
-  // console.log(result.monthlyPayment);
-  //
-  // const multipleResults = await calculateMultiplePeriods(10000, 1000, 1000);
-  // console.log(multipleResults.map(r => r.monthlyPayment));
+  const totalAmount = 10000;
 
-  const result = await calculateMonthlyPayment(10000, 60, 1000, 1000);
+  // const noOfMonths = 60;
+  // const result = await calculateMonthlyPayment(totalAmount, noOfMonths, totalAmount * 0.1, totalAmount * 0.1);
+
+  const result = await calculateMultiplePeriods(
+    totalAmount,
+    totalAmount * 0.1,
+    totalAmount * 0.1,
+  );
+
+  if (result) {
+    for (const res of result) {
+      res.monthlyPayment = Math.round(res.monthlyPayment);
+    }
+  }
 
   return { result };
-  return { status: "ok" };
 });
