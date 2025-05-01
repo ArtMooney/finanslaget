@@ -5,6 +5,7 @@ import { calculateMultiplePeriods } from "../utils/calculate-multiple-periods.js
 export default defineEventHandler(async (event) => {
   const config = useRuntimeConfig();
   const headers = getHeaders(event);
+  const body = await readBody(event);
 
   if (!(await checkLogin(headers, config.userName, config.userPass))) {
     throw createError({
@@ -13,7 +14,7 @@ export default defineEventHandler(async (event) => {
     });
   }
 
-  const totalAmount = 10000;
+  const totalAmount = parseInt(body.amount);
 
   // const noOfMonths = 60;
   // const result = await calculateMonthlyPayment(totalAmount, noOfMonths, totalAmount * 0.1, totalAmount * 0.1);
