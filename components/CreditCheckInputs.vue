@@ -7,6 +7,7 @@
       placeholder-text=""
       :required="true"
       autocomplete="email"
+      @update-value="email = $event"
     />
 
     <Input
@@ -16,6 +17,7 @@
       placeholder-text="070XXXXXXX"
       :required="true"
       autocomplete="tel"
+      @update-value="phone = $event"
     />
 
     <Input
@@ -25,6 +27,7 @@
       placeholder-text="55XXXX-XXXX"
       :required="true"
       autocomplete=""
+      @update-value="companyRegistrationNumber = $event"
     />
 
     <Input
@@ -34,11 +37,12 @@
       placeholder-text="Lägst 10 000"
       :required="true"
       autocomplete=""
+      @update-value="amount = $event"
     />
   </div>
 
   <Button
-    @click="$emit('submit')"
+    @click="handleSubmit"
     text="Skapa snabbkalkyl"
     link=""
     hash=""
@@ -58,5 +62,25 @@ export default {
   components: { Button, Input },
 
   emits: ["submit"],
+
+  data() {
+    return {
+      email: "",
+      phone: "",
+      companyRegistrationNumber: "",
+      amount: "",
+    };
+  },
+
+  methods: {
+    handleSubmit() {
+      this.$emit("submit", {
+        email: this.email,
+        phone: this.phone,
+        companyRegistrationNumber: this.companyRegistrationNumber,
+        amount: this.amount,
+      });
+    },
+  },
 };
 </script>
