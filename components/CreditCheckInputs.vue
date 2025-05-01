@@ -8,6 +8,7 @@
       :required="true"
       autocomplete="email"
       @update-value="email = $event"
+      @validated="okToSubmit = $event"
     />
 
     <Input
@@ -18,6 +19,7 @@
       :required="true"
       autocomplete="tel"
       @update-value="phone = $event"
+      @validated="okToSubmit = $event"
     />
 
     <Input
@@ -28,6 +30,7 @@
       :required="true"
       autocomplete=""
       @update-value="companyRegistrationNumber = $event"
+      @validated="okToSubmit = $event"
     />
 
     <Input
@@ -38,6 +41,7 @@
       :required="true"
       autocomplete=""
       @update-value="amount = $event"
+      @validated="okToSubmit = $event"
     />
   </div>
 
@@ -69,11 +73,14 @@ export default {
       phone: "",
       companyRegistrationNumber: "",
       amount: "",
+      okToSubmit: true,
     };
   },
 
   methods: {
     handleSubmit() {
+      if (!this.okToSubmit) return;
+
       this.$emit("submit", {
         email: this.email,
         phone: this.phone,
