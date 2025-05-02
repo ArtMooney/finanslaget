@@ -1,7 +1,7 @@
 <template>
   <button
     @click="navigateTo({ path: link, hash: hash })"
-    class="rounded-lg px-6 py-3 text-center text-base text-white no-underline duration-200 bg-[#009bd9] cursor-pointer"
+    class="rounded-lg px-6 py-3 text-center text-base text-white no-underline duration-200 bg-[#009bd9] hover:bg-[#2ba8da] cursor-pointer"
     :type="type"
     :data-wait="dataWait"
     text=""
