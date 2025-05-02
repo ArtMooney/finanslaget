@@ -62,7 +62,7 @@ import Input from "~/components/elements/Input.vue";
 import Button from "~/components/elements/Button.vue";
 
 export default {
-  name: "CreditCheck",
+  name: "CreditCheckInputs",
 
   components: { Button, Input },
 
