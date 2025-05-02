@@ -52,11 +52,10 @@
 
   <Button
     @click="handleSubmit"
-    text="Skapa snabbkalkyl"
+    :text="buttonText"
     link=""
     hash=""
     type="submit"
-    data-wait="Vänta..."
     class="mt-2"
   />
 </template>
@@ -74,6 +73,7 @@ export default {
 
   data() {
     return {
+      buttonText: "Skapa snabbkalkyl",
       email: "",
       phone: "",
       companyRegistrationNumber: "",
@@ -87,6 +87,7 @@ export default {
     handleSubmit() {
       this.submitted = true;
       this.validations = [];
+      this.buttonText = "Vänta...";
 
       setTimeout(() => {
         let check = false;
@@ -97,7 +98,10 @@ export default {
           }
         }
 
-        if (check) return;
+        if (check) {
+          this.buttonText = "Skapa snabbkalkyl";
+          return;
+        }
 
         this.$emit("submit", {
           email: this.email,
