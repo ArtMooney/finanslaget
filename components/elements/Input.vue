@@ -10,7 +10,7 @@
       class="w-full border border-[#cccccc] p-3 placeholder:text-[#cccccc] rounded-lg text-base text-[#666666] focus:border-black focus:outline-none transition-colors duration-200"
       maxlength="256"
       :name="name"
-      :type="type"
+      :type="getType"
       :placeholder="placeholderText"
       :required="required"
       @input="$emit('updateValue', $event.target.value)"
@@ -18,7 +18,7 @@
     />
 
     <textarea
-      v-if="type === 'message'"
+      v-if="getType === 'message'"
       class="min-h-28 w-full border border-[#cccccc] p-3 placeholder:text-[#cccccc] rounded-lg text-base text-[#666666]"
       maxlength="5000"
       :name="name"
@@ -27,16 +27,13 @@
       @input="$emit('updateValue', $event.target.value)"
     ></textarea>
 
-    <div class="text-xs mx-2 text-red-600 mt-1 mb-2 rounded">
-      Email adressen behöver vara giltig.
+    <div v-if="!validated" class="text-xs mx-2 text-red-600 mt-1 mb-2 rounded">
+      {{ getErrorMessage }}
     </div>
   </div>
 </template>
 
 <script>
-import { emailValidator } from "~/utils/emailValidator.js";
-import { phoneValidator } from "~/utils/phoneValidator.js";
-
 export default {
   name: "Input",
 
@@ -63,6 +60,10 @@ export default {
       type: String,
       required: false,
     },
+    min: {
+      type: String,
+      required: false,
+    },
   },
 
   emits: ["updateValue", "validated"],
@@ -70,23 +71,57 @@ export default {
   data() {
     return {
       inputFieldValue: "",
+      validated: true,
       emailReg:
         /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,24}))$/,
+      phoneReg:
+        /^(?:(?:0|(?:\+46)[ -]?)(?:(?:7[0-9][ -]?\d{3}[ -]?\d{2}[ -]?\d{2})|(?:[1-9][0-9]{0,2}[ -]?\d{5,7})))$/, // needs more work
+      orgNumberReg: /^\s*(\d{6}[-]?\d{4}|\d{11})\s*$/,
     };
+  },
+
+  computed: {
+    getType() {
+      if (this.type === "org") return "text";
+
+      return this.type;
+    },
+
+    getErrorMessage() {
+      if (this.type === "email") return "Email adressen behöver vara giltig";
+      if (this.type === "tel") return "Telefonnumret behöver vara giltigt";
+      if (this.type === "org")
+        return "Organisationsnumret behöver vara giltigt";
+      if (this.type === "number" && this.min)
+        return "Beloppet måste vara större eller lika med " + this.min + " SEK";
+
+      return "Okänt fel";
+    },
   },
 
   watch: {
     inputFieldValue() {
-      let validated = true;
-
-      validated =
+      this.validated =
         this.type === "email" &&
         this.required &&
         this.emailReg.test(this.inputFieldValue);
 
-      // if (this.type === "tel" && this.required) phoneValidator(value);
+      this.validated =
+        this.type === "tel" &&
+        this.required &&
+        this.phoneReg.test(this.inputFieldValue);
 
-      console.log(this.inputFieldValue, validated);
+      this.validated =
+        this.type === "org" &&
+        this.required &&
+        this.orgNumberReg.test(this.inputFieldValue);
+
+      this.validated =
+        this.type === "number" &&
+        this.required &&
+        parseInt(this.inputFieldValue) >= parseInt(this.min);
+
+      console.log(this.inputFieldValue, this.validated, parseInt(this.min));
       // this.$emit("validated", validated);
     },
   },

@@ -57,6 +57,8 @@ export default {
           body: event,
         });
 
+        console.log(this.apiData);
+
         this.submitted = true;
       } catch (err) {
         this.error = true;
