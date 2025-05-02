@@ -1,3 +1,5 @@
+// <script src="https://cdn.jsdelivr.net/gh/ArtMooney/finanslaget@v0.0.1/loader.js"></script>
+
 (function () {
   const appContainer = document.createElement("div");
   appContainer.id = "app";
