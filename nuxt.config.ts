@@ -7,9 +7,20 @@ export default defineNuxtConfig({
   css: ["/assets/css/main.css"],
   vite: {
     plugins: [tailwindcss()],
+    build: {
+      assetsInlineLimit: 51200,
+      rollupOptions: {
+        output: {
+          manualChunks: () => "app.js",
+        },
+      },
+    },
   },
   nitro: {
     preset: "cloudflare-pages",
+    output: {
+      singleChunk: true,
+    },
     prerender: {
       crawlLinks: true,
       routes: ["/"],
