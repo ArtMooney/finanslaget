@@ -8,7 +8,8 @@
       :required="true"
       autocomplete="email"
       @update-value="email = $event"
-      @validated="okToSubmit = $event"
+      @validated="handleValidated"
+      :submitted="submitted"
     />
 
     <Input
@@ -19,7 +20,8 @@
       :required="true"
       autocomplete="tel"
       @update-value="phone = $event"
-      @validated="okToSubmit = $event"
+      @validated="handleValidated"
+      :submitted="submitted"
     />
 
     <Input
@@ -30,7 +32,8 @@
       :required="true"
       autocomplete=""
       @update-value="companyRegistrationNumber = $event"
-      @validated="okToSubmit = $event"
+      @validated="handleValidated"
+      :submitted="submitted"
     />
 
     <Input
@@ -42,7 +45,8 @@
       :required="true"
       autocomplete=""
       @update-value="amount = $event"
-      @validated="okToSubmit = $event"
+      @validated="handleValidated"
+      :submitted="submitted"
     />
   </div>
 
@@ -74,20 +78,39 @@ export default {
       phone: "",
       companyRegistrationNumber: "",
       amount: "",
-      okToSubmit: true,
+      submitted: false,
+      validations: [],
     };
   },
 
   methods: {
     handleSubmit() {
-      if (!this.okToSubmit) return;
+      this.submitted = true;
+      this.validations = [];
 
-      this.$emit("submit", {
-        email: this.email,
-        phone: this.phone,
-        companyRegistrationNumber: this.companyRegistrationNumber,
-        amount: this.amount,
-      });
+      setTimeout(() => {
+        let check = false;
+
+        for (const validation of this.validations) {
+          if (!validation) {
+            check = true;
+          }
+        }
+
+        if (check) return;
+
+        this.$emit("submit", {
+          email: this.email,
+          phone: this.phone,
+          companyRegistrationNumber: this.companyRegistrationNumber,
+          amount: this.amount,
+        });
+      }, 500);
+    },
+
+    handleValidated(event) {
+      this.validations.push(event);
+      this.submitted = false;
     },
   },
 };

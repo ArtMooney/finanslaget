@@ -14,7 +14,6 @@
       :placeholder="placeholderText"
       :required="required"
       @input="$emit('updateValue', $event.target.value)"
-      @validated="handleValidation"
     />
 
     <textarea
@@ -64,6 +63,11 @@ export default {
       type: String,
       required: false,
     },
+    submitted: {
+      type: Boolean,
+      required: false,
+      default: false,
+    },
   },
 
   emits: ["updateValue", "validated"],
@@ -99,30 +103,57 @@ export default {
     },
   },
 
+  methods: {
+    handleError() {
+      if (!this.validated) {
+        this.$emit("validated", this.validated);
+
+        setTimeout(() => {
+          window.addEventListener(
+            "click",
+            () => {
+              this.validated = true;
+            },
+            { once: true },
+          );
+        }, 500);
+      } else {
+        this.$emit("validated", this.validated);
+      }
+    },
+  },
+
   watch: {
-    inputFieldValue() {
-      this.validated =
-        this.type === "email" &&
-        this.required &&
-        this.emailReg.test(this.inputFieldValue);
+    submitted() {
+      if (!this.submitted) return;
+      this.validated = true;
 
-      this.validated =
-        this.type === "tel" &&
-        this.required &&
-        this.phoneReg.test(this.inputFieldValue);
+      switch (this.type) {
+        case "email":
+          this.validated =
+            this.required && this.emailReg.test(this.inputFieldValue);
+          this.handleError();
+          break;
 
-      this.validated =
-        this.type === "org" &&
-        this.required &&
-        this.orgNumberReg.test(this.inputFieldValue);
+        case "tel":
+          this.validated =
+            this.required && this.phoneReg.test(this.inputFieldValue);
+          this.handleError();
+          break;
 
-      this.validated =
-        this.type === "number" &&
-        this.required &&
-        parseInt(this.inputFieldValue) >= parseInt(this.min);
+        case "org":
+          this.validated =
+            this.required && this.orgNumberReg.test(this.inputFieldValue);
+          this.handleError();
+          break;
 
-      console.log(this.inputFieldValue, this.validated, parseInt(this.min));
-      // this.$emit("validated", validated);
+        case "number":
+          this.validated =
+            this.required &&
+            parseInt(this.inputFieldValue) >= parseInt(this.min);
+          this.handleError();
+          break;
+      }
     },
   },
 };
