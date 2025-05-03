@@ -1,4 +1,4 @@
-// <script src="https://cdn.jsdelivr.net/gh/ArtMooney/finanslaget@v0.0.1/loader.js"></script>
+// <script src="https://cdn.jsdelivr.net/gh/ArtMooney/finanslaget@v0.0.4/loader.js"></script>
 
 (function () {
   const appContainer = document.createElement("div");
@@ -6,7 +6,7 @@
   document.body.appendChild(appContainer);
 
   const appUrl =
-    "https://cdn.jsdelivr.net/gh/ArtMooney/finanslaget@v0.0.1/dist";
+    "https://cdn.jsdelivr.net/gh/ArtMooney/finanslaget@v0.0.4/dist";
   const apiBase = "https://finanslaget.pages.dev";
   window.apiBase = apiBase;
 
