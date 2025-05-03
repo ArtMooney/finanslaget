@@ -1,7 +1,6 @@
 export default defineNuxtPlugin(() => {
   if (process.client && window.parent !== window) {
-    setTimeout(() => {
-      console.log("Skickar testmeddelande från iframe");
+    const updateHeight = () => {
       window.parent.postMessage(
         {
           type: "resize",
@@ -10,6 +9,11 @@ export default defineNuxtPlugin(() => {
         },
         "*",
       );
+    };
+
+    setTimeout(() => {
+      console.log("Skickar testmeddelande från iframe");
+      updateHeight();
     }, 1000);
 
     window.addEventListener("resize", updateHeight);
