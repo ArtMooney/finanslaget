@@ -2,7 +2,7 @@
 
 (function () {
   const appContainer = document.createElement("div");
-  appContainer.id = "app";
+  appContainer.id = "custom-app-container";
   document.body.appendChild(appContainer);
 
   const appUrl =
