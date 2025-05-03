@@ -6,11 +6,7 @@
   "exclude": [
     "/_nuxt/*",
     "/",
-    "/_payload.json",
     "/200",
-    "/404",
-    "/robots.txt",
-    "/sitemap.xml",
-    "/__sitemap__/style.xsl"
+    "/404"
   ]
 }
