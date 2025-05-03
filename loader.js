@@ -9,7 +9,7 @@
     "https://cdn.jsdelivr.net/gh/ArtMooney/finanslaget@v0.0.4/dist";
   window.apiBase = "https://finanslaget.pages.dev";
 
-  console.log("HEJ");
+  console.log("TEST");
 
   fetch(appUrl + "/index.html")
     .then((response) => response.text())
