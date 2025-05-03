@@ -1,4 +1,6 @@
 export default defineNuxtPlugin(() => {
+  console.log("Plugin loaded");
+
   if (process.client && window.parent !== window) {
     const updateHeight = () => {
       window.parent.postMessage(
