@@ -1,22 +1,30 @@
 export default defineNuxtPlugin(() => {
   if (process.client && window.parent !== window) {
     const updateHeight = () => {
+      const height = Math.max(
+        document.body.scrollHeight,
+        document.documentElement.scrollHeight,
+        document.body.offsetHeight,
+        document.documentElement.offsetHeight,
+      );
+
       window.parent.postMessage(
         {
           type: "resize",
-          height: document.body.scrollHeight,
+          height: height,
           source: "finanslaget-app",
         },
         "*",
       );
     };
 
-    setTimeout(() => {
-      updateHeight();
-    }, 1000);
+    setTimeout(updateHeight, 100);
+    setTimeout(updateHeight, 500);
+    setTimeout(updateHeight, 1000);
+    setTimeout(updateHeight, 2000);
 
     window.addEventListener("resize", updateHeight);
-    setTimeout(updateHeight, 500);
+    window.addEventListener("load", updateHeight);
 
     const observer = new MutationObserver(updateHeight);
     observer.observe(document.body, {
