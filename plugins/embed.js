@@ -1,23 +1,23 @@
 export default defineNuxtPlugin(() => {
   if (process.client && window.parent !== window) {
-    const updateHeight = () => {
-      setTimeout(() => {
-        const height = Math.max(
-          document.body.scrollHeight,
-          document.documentElement.scrollHeight,
-          document.body.offsetHeight,
-          document.documentElement.offsetHeight,
-        );
+    let lastWidth = window.innerWidth;
 
-        window.parent.postMessage(
-          {
-            type: "resize",
-            height: height,
-            source: "finanslaget-app",
-          },
-          "*",
-        );
-      }, 50);
+    const updateHeight = () => {
+      const height = Math.max(
+        document.body.scrollHeight,
+        document.documentElement.scrollHeight,
+        document.body.offsetHeight,
+        document.documentElement.offsetHeight,
+      );
+
+      window.parent.postMessage(
+        {
+          type: "resize",
+          height: height,
+          source: "finanslaget-app",
+        },
+        "*",
+      );
     };
 
     setTimeout(updateHeight, 100);
@@ -25,15 +25,14 @@ export default defineNuxtPlugin(() => {
     setTimeout(updateHeight, 1000);
 
     window.addEventListener("resize", () => {
-      window.parent.postMessage(
-        {
-          type: "reset-height",
-          source: "finanslaget-app",
-        },
-        "*",
-      );
+      const currentWidth = window.innerWidth;
 
-      updateHeight();
+      if (currentWidth !== lastWidth) {
+        lastWidth = currentWidth;
+        updateHeight();
+      } else {
+        updateHeight();
+      }
     });
 
     window.addEventListener("load", updateHeight);
