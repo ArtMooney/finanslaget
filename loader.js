@@ -7,8 +7,9 @@
 
   const appUrl =
     "https://cdn.jsdelivr.net/gh/ArtMooney/finanslaget@v0.0.4/dist";
-  const apiBase = "https://finanslaget.pages.dev";
-  window.apiBase = apiBase;
+  window.apiBase = "https://finanslaget.pages.dev";
+
+  console.log("HEJ");
 
   fetch(appUrl + "/index.html")
     .then((response) => response.text())
