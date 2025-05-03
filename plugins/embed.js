@@ -1,11 +1,7 @@
 export default defineNuxtPlugin(() => {
   if (process.client && window.parent !== window) {
-    let lastWidth = window.innerWidth;
-
     const updateHeight = () => {
       const height = Math.max(
-        document.body.scrollHeight,
-        document.documentElement.scrollHeight,
         document.body.offsetHeight,
         document.documentElement.offsetHeight,
       );
@@ -23,18 +19,9 @@ export default defineNuxtPlugin(() => {
     setTimeout(updateHeight, 100);
     setTimeout(updateHeight, 500);
     setTimeout(updateHeight, 1000);
+    setTimeout(updateHeight, 2000);
 
-    window.addEventListener("resize", () => {
-      const currentWidth = window.innerWidth;
-
-      if (currentWidth !== lastWidth) {
-        lastWidth = currentWidth;
-        updateHeight();
-      } else {
-        updateHeight();
-      }
-    });
-
+    window.addEventListener("resize", updateHeight);
     window.addEventListener("load", updateHeight);
 
     const observer = new MutationObserver(updateHeight);
