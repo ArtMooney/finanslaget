@@ -1,6 +1,6 @@
 {
-  "date": "2025-05-04T19:36:47.674Z",
-  "preset": "nitro-prerender",
+  "date": "2025-05-04T19:45:45.234Z",
+  "preset": "cloudflare-pages",
   "framework": {
     "name": "nuxt",
     "version": "3.17.1"
@@ -9,7 +9,10 @@
     "nitro": "2.11.11"
   },
   "commands": {
-    "preview": "npx serve ./https:/cdn.jsdelivr.net/gh/ArtMooney/finanslaget@v0.0.10/dist"
+    "preview": "npx wrangler --cwd ./ pages dev",
+    "deploy": "npx wrangler --cwd ./ pages deploy"
   },
-  "config": {}
+  "config": {
+    "cloudflare": {}
+  }
 }

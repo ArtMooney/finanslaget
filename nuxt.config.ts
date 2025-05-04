@@ -6,10 +6,6 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   css: ["/assets/css/main.css"],
 
-  app: {
-    baseURL: "https://cdn.jsdelivr.net/gh/ArtMooney/finanslaget@v0.0.10/dist/",
-  },
-
   vite: {
     plugins: [tailwindcss()],
     build: {
@@ -47,8 +43,6 @@ export default defineNuxtConfig({
     public: {
       userName: process.env.NUXT_PUBLIC_USERNAME,
       userPass: process.env.NUXT_PUBLIC_USERPASS,
-
-      baseURL: "https://cdn.jsdelivr.net/gh/ArtMooney/finanslaget@v0.0.10/dist",
 
       apiBase:
         process.env.NODE_ENV === "production"
