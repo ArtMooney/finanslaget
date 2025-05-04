@@ -5,9 +5,21 @@ export default defineNuxtConfig({
   compatibilityDate: "2025-04-28",
   devtools: { enabled: true },
   css: ["/assets/css/main.css"],
+
   vite: {
     plugins: [tailwindcss()],
+    build: {
+      cssCodeSplit: false,
+      rollupOptions: {
+        output: {
+          manualChunks: () => "app",
+        },
+      },
+    },
   },
+
+  ssr: true,
+
   nitro: {
     preset: "cloudflare-pages",
     prerender: {
@@ -16,6 +28,11 @@ export default defineNuxtConfig({
       ignore: [],
     },
   },
+
+  experimental: {
+    inlineSSRStyles: false,
+  },
+
   runtimeConfig: {
     mailgunApiKey: process.env.NUXT_MAILGUN_API_KEY,
     emailFrom: process.env.NUXT_EMAIL_FROM,
@@ -26,9 +43,16 @@ export default defineNuxtConfig({
     public: {
       userName: process.env.NUXT_PUBLIC_USERNAME,
       userPass: process.env.NUXT_PUBLIC_USERPASS,
+
+      apiBase:
+        process.env.NODE_ENV === "production"
+          ? "https://finanslaget.pages.dev"
+          : "",
     },
   },
+
   modules: ["@nuxtjs/robots", "@nuxtjs/sitemap", "@nuxt/image", "@nuxt/icon"],
+
   image: {
     dir: "assets/images",
     format: ["webp", "jpg", "png"],
@@ -51,6 +75,7 @@ export default defineNuxtConfig({
     staticFilename: "[name]-[width]-[height]-[format].[ext]",
     provider: "ipxStatic",
   },
+
   robots: {
     rules: [
       {
@@ -62,6 +87,7 @@ export default defineNuxtConfig({
     disallowNonStandardSchemes: true,
     sitemap: "",
   },
+
   sitemap: {
     hostname: "",
     gzip: true,

@@ -1,16 +1,4 @@
 <script setup>
-useSeoMeta({
-  title: "",
-  description: "",
-  ogTitle: "",
-  ogDescription: "",
-  ogImage: "",
-  twitterCard: "",
-  twitterTitle: "",
-  twitterDescription: "",
-  twitterImage: "",
-});
-
 definePageMeta({
   ssr: false,
 });
@@ -49,7 +37,8 @@ export default {
   methods: {
     async handleSubmit(event) {
       try {
-        this.apiData = await $fetch("/api/calculate", {
+        const config = useRuntimeConfig();
+        this.apiData = await $fetch(`${config.public.apiBase}/api/calculate`, {
           method: "POST",
           headers: {
             Authorization: "Basic " + btoa(this.userName + ":" + this.userPass),
