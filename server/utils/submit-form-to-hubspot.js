@@ -1,4 +1,5 @@
 export async function submitFormToHubspot(portalId, formId, formData, context) {
+  const config = useRuntimeConfig();
   const headersList = {
     Accept: "*/*",
     "Content-Type": "application/json",
@@ -17,7 +18,7 @@ export async function submitFormToHubspot(portalId, formId, formData, context) {
 
   try {
     const response = await fetch(
-      `https://api.hsforms.com/submissions/v3/integration/submit/${portalId}/${formId}`,
+      `https://api-eu1.hsforms.com/submissions/v3/integration/submit/${config.portalId}/${config.formId}`,
       {
         method: "POST",
         headers: headersList,
