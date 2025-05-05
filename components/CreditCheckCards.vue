@@ -20,7 +20,7 @@
     slutvärde.
   </div>
 
-  <NuxtLink :to="buttonUrl" external>
+  <NuxtLink :to="buttonUrl" external target="_parent">
     <Button
       text="Boka ett möte med rådgivare"
       link=""
