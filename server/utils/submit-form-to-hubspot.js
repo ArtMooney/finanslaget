@@ -15,26 +15,26 @@ export async function submitFormToHubspot(portalId, formId, formData, context) {
     context: context,
   };
 
-  // try {
-  //   const response = await fetch(
-  //     `https://api.hsforms.com/submissions/v3/integration/submit/${portalId}/${formId}`,
-  //     {
-  //       method: "POST",
-  //       headers: headersList,
-  //       body: JSON.stringify(requestBody),
-  //     },
-  //   );
-  //
-  //   if (!response.ok) {
-  //     const errorData = await response.json();
-  //     throw new Error(
-  //       `HubSpot form submission failed: ${errorData.message || response.statusText}`,
-  //     );
-  //   }
-  //
-  //   return await response.json();
-  // } catch (error) {
-  //   console.error("Error submitting form to HubSpot:", error);
-  //   throw error;
-  // }
+  try {
+    const response = await fetch(
+      `https://api.hsforms.com/submissions/v3/integration/submit/${portalId}/${formId}`,
+      {
+        method: "POST",
+        headers: headersList,
+        body: JSON.stringify(requestBody),
+      },
+    );
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(
+        `HubSpot form submission failed: ${errorData.message || response.statusText}`,
+      );
+    }
+
+    return await response.json();
+  } catch (error) {
+    console.error("Error submitting form to HubSpot:", error);
+    throw error;
+  }
 }
