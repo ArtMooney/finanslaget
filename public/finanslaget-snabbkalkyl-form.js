@@ -16,7 +16,7 @@
 
   window.addEventListener("message", (event) => {
     if (event.data && event.data.type === "resize" && event.data.height) {
-      const iframe = document.getElementById("finanslaget-iframe");
+      const iframe = document.getElementById("finanslaget-snabbkalkyl");
       if (iframe) iframe.style.height = `${event.data.height}px`;
     }
   });
