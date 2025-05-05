@@ -44,6 +44,11 @@ export default {
       required: false,
       default: {},
     },
+    buttonUrl: {
+      type: String,
+      required: false,
+      default: "#",
+    },
   },
 
   computed: {
@@ -53,18 +58,6 @@ export default {
       }
 
       return [];
-    },
-
-    buttonUrl() {
-      const encodedUrl = this.$route.query.button_url || "#";
-      if (encodedUrl === "#") return "#";
-
-      try {
-        return decodeURIComponent(encodedUrl);
-      } catch (e) {
-        console.error("Error decoding URL:", e);
-        return encodedUrl;
-      }
     },
   },
 };
