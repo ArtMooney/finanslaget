@@ -5,12 +5,20 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        heading: ["Hanuman", "sans-serif"],
-        body: ["Poppins", "sans-serif"],
+        heading: ["Merriweather Sans", "sans-serif"],
+        body: ["Merriweather Sans", "sans-serif"],
       },
     },
   },
-  plugins: [],
+  plugins: [
+    plugin(function ({ addBase }) {
+      addBase({
+        body: {
+          "@apply font-body": {},
+        },
+      });
+    }),
+  ],
   corePlugins: {
     preflight: true,
   },
