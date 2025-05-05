@@ -8,17 +8,7 @@ export default defineNuxtConfig({
 
   vite: {
     plugins: [tailwindcss()],
-    build: {
-      cssCodeSplit: false,
-      rollupOptions: {
-        output: {
-          manualChunks: () => "app",
-        },
-      },
-    },
   },
-
-  ssr: true,
 
   nitro: {
     preset: "cloudflare-pages",
@@ -27,10 +17,6 @@ export default defineNuxtConfig({
       routes: ["/"],
       ignore: [],
     },
-  },
-
-  experimental: {
-    inlineSSRStyles: false,
   },
 
   runtimeConfig: {
@@ -43,11 +29,6 @@ export default defineNuxtConfig({
     public: {
       userName: process.env.NUXT_PUBLIC_USERNAME,
       userPass: process.env.NUXT_PUBLIC_USERPASS,
-
-      apiBase:
-        process.env.NODE_ENV === "production"
-          ? "https://finanslaget.pages.dev"
-          : "",
     },
   },
 
