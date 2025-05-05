@@ -4,8 +4,8 @@
   const currentScript = document.currentScript;
 
   const iframe = document.createElement("iframe");
-  iframe.id = "finanslaget-iframe";
-  iframe.src = "https://finanslaget.pages.dev";
+  iframe.id = "finanslaget-snabbkalkyl";
+  iframe.src = "https://finanslaget.pages.dev/snabbkalkyl";
   iframe.title = "Small form app to get price suggestions from Finanslaget";
   iframe.style.width = "100%";
   iframe.style.height = "0";
