@@ -56,7 +56,15 @@ export default {
     },
 
     buttonUrl() {
-      return this.$route.query.button_url || "#";
+      const encodedUrl = this.$route.query.button_url || "#";
+      if (encodedUrl === "#") return "#";
+
+      try {
+        return decodeURIComponent(encodedUrl);
+      } catch (e) {
+        console.error("Error decoding URL:", e);
+        return encodedUrl;
+      }
     },
   },
 };
