@@ -20,7 +20,7 @@
     slutvärde.
   </div>
 
-  <NuxtLink :to="$route.query.button_url || '#'" external>
+  <NuxtLink :to="buttonUrl" external>
     <Button
       text="Boka ett möte med rådgivare"
       link=""
@@ -53,6 +53,10 @@ export default {
       }
 
       return [];
+    },
+
+    buttonUrl() {
+      return this.$route.query.button_url || "#";
     },
   },
 };
