@@ -1,4 +1,4 @@
-// <script src="https://cdn.jsdelivr.net/gh/ArtMooney/finanslaget@v0.0.6/loader.js"></script>
+// <script src="https://cdn.jsdelivr.net/gh/ArtMooney/finanslaget@v0.0.1/loader.js"></script>
 
 (function () {
   const appContainer = document.createElement("div");
@@ -6,10 +6,8 @@
   document.body.appendChild(appContainer);
 
   const appUrl =
-    "https://cdn.jsdelivr.net/gh/ArtMooney/finanslaget@v0.0.6/dist";
+    "https://cdn.jsdelivr.net/gh/ArtMooney/finanslaget@v0.0.1/dist";
   window.apiBase = "https://finanslaget.pages.dev";
-
-  console.log("TEST");
 
   fetch(appUrl + "/index.html")
     .then((response) => response.text())
