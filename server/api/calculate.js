@@ -37,9 +37,9 @@ export default defineEventHandler(async (event) => {
         mobilephone: body.phone,
         organisationsnr: body.companyRegistrationNumber,
         belopp: body.amount,
-        leasing_36_manader: result[0]?.monthlyPayment,
-        leasing_48_manader: result[1]?.monthlyPayment,
-        leasing_60_manader: result[2]?.monthlyPayment,
+        leasing_36_manader: result[1]?.monthlyPayment,
+        leasing_48_manader: result[2]?.monthlyPayment,
+        leasing_60_manader: result[0]?.monthlyPayment,
       },
       { pageUri: body.pageUri, pageName: body.pageName },
     );
