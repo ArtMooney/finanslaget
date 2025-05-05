@@ -1,3 +1,5 @@
+// <script src="https://finanslaget.pages.dev/finanslaget-snabbkalkyl-form.js"></script>
+
 (function () {
   const currentScript = document.currentScript;
 
