@@ -36,9 +36,11 @@ export default {
 
   methods: {
     async handleSubmit(event) {
+      event.pageUri = window.location.href;
+      event.pageName = document.title;
+
       try {
-        const config = useRuntimeConfig();
-        this.apiData = await $fetch(`${config.public.apiBase}/api/calculate`, {
+        this.apiData = await $fetch("/api/calculate", {
           method: "POST",
           headers: {
             Authorization: "Basic " + btoa(this.userName + ":" + this.userPass),
