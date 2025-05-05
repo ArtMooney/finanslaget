@@ -1,5 +1,9 @@
 import { getApiToken } from "./get-api-token.js";
 
+// example usage
+// const noOfMonths = 60;
+// const result = await calculateMonthlyPayment(totalAmount, noOfMonths, totalAmount * 0.1, totalAmount * 0.1);
+
 export async function calculateMonthlyPayment(
   totalAmount,
   noOfMonths,
