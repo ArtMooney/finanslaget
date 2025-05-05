@@ -1,4 +1,6 @@
 (function () {
+  const currentScript = document.currentScript;
+
   const iframe = document.createElement("iframe");
   iframe.id = "finanslaget-iframe";
   iframe.src = "https://finanslaget.pages.dev";
@@ -12,11 +14,16 @@
 
   window.addEventListener("message", (event) => {
     if (event.data && event.data.type === "resize" && event.data.height) {
-      iframe.style.height = `${event.data.height}px`;
+      const iframe = document.getElementById("finanslaget-iframe");
+      if (iframe) iframe.style.height = `${event.data.height}px`;
     }
   });
 
-  document.addEventListener("DOMContentLoaded", function () {
-    document.currentScript.insertAdjacentElement("afterend", iframe);
-  });
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", function () {
+      currentScript.parentNode.insertBefore(iframe, currentScript.nextSibling);
+    });
+  } else {
+    currentScript.parentNode.insertBefore(iframe, currentScript.nextSibling);
+  }
 })();
