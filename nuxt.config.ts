@@ -6,16 +6,62 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   css: ["/assets/css/main.css"],
 
-  vite: {
-    plugins: [tailwindcss()],
+  ssr: false,
+
+  app: {
+    buildAssetsDir: "./",
+    head: {
+      charset: "utf-8",
+      viewport: "width=device-width, initial-scale=1",
+    },
   },
 
   nitro: {
-    preset: "cloudflare-pages",
-    prerender: {
-      crawlLinks: true,
-      routes: ["/"],
-      ignore: [],
+    output: {
+      publicDir: "dist",
+    },
+    preset: "static",
+    routeRules: {
+      "/**": { static: true },
+    },
+    staticGeneration: {
+      ignore: ["/_nuxt/**"],
+    },
+  },
+
+  experimental: {
+    appManifest: false,
+    componentIslands: false,
+    payloadExtraction: false,
+    treeshakeClientOnly: true,
+    inlineSSRStyles: false,
+  },
+
+  hooks: {
+    "nitro:build:public": (nitro) => {},
+  },
+
+  routeRules: {
+    "/**": { prerender: false },
+  },
+
+  vite: {
+    plugins: [tailwindcss()],
+    build: {
+      assetsInlineLimit: 51200,
+      minify: "terser",
+      rollupOptions: {
+        output: {
+          entryFileNames: "index.js",
+          chunkFileNames: "[name].js",
+          assetFileNames: "[name].[ext]",
+
+          inlineDynamicImports: true,
+          manualChunks: undefined,
+        },
+      },
+      manifest: false,
+      emptyOutDir: true,
     },
   },
 
@@ -34,7 +80,7 @@ export default defineNuxtConfig({
     },
   },
 
-  modules: ["@nuxtjs/robots", "@nuxtjs/sitemap", "@nuxt/image", "@nuxt/icon"],
+  modules: [],
 
   image: {
     dir: "assets/images",
