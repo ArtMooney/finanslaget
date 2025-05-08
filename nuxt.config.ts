@@ -80,7 +80,7 @@ export default defineNuxtConfig({
     },
   },
 
-  modules: [],
+  modules: ["@nuxtjs/robots", "@nuxtjs/sitemap", "@nuxt/image", "@nuxt/icon"],
 
   image: {
     dir: "assets/images",
